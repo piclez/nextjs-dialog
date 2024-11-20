@@ -1,28 +1,32 @@
-import React from 'react'
 import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
-import { Button } from '@/components/ui/button';
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
-
-function Dialog({ openDialog, closeDialog }) {
+function Dialog({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (isOpen: boolean) => void;
+}) {
   return (
     <div>
-      <AlertDialog open={openDialog}>
-        <AlertDialogContent>
+      <AlertDialog open={open} onOpenChange={onOpenChange}>
+        <AlertDialogContent onClick={(e) => e.stopPropagation()}>
           <AlertDialogHeader>
             <AlertDialogTitle>Alert</AlertDialogTitle>
             <AlertDialogDescription />
-            <Button onClick={() => closeDialog(false)}>Close</Button>
+            <Button onClick={() => onOpenChange(false)}>Close</Button>
           </AlertDialogHeader>
         </AlertDialogContent>
       </AlertDialog>
     </div>
-  )
+  );
 }
 
-export default Dialog
+export default Dialog;
